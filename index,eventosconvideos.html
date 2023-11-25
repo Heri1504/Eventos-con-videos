@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eventos de Video</title>
+</head>
+<body>
+
+<video id="miVideo" width="320" height="240" controls>
+  <source src="Download.mp4" type="video/mp4">
+  Tu navegador no soporta el tag de video.
+</video>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Obtener el elemento de video
+  var miVideo = document.getElementById('miVideo');
+
+  // Escuchar el evento 'play'
+  miVideo.addEventListener('play', function() {
+    console.log('El video está reproduciéndose');
+  });
+
+  // Escuchar el evento 'seeking'
+  miVideo.addEventListener('seeking', function() {
+    console.log('El video está buscando');
+  });
+
+  // Escuchar el evento 'ended'
+  miVideo.addEventListener('ended', function() {
+    console.log('El video ha finalizado');
+    // Mostrar una alerta de confirmación después de 3 segundos
+    setTimeout(function() {
+      var confirmacion = confirm('¿Quieres volver a reproducir el video?');
+      if (confirmacion) {
+        // Reiniciar el video si el usuario confirma
+        miVideo.currentTime = 0;
+        miVideo.play();
+      }
+    }, 3000);
+  });
+
+  // Usar setInterval para mostrar la posición actual del video cada segundo
+  setInterval(function() {
+    console.log('Posición actual del video: ' + miVideo.currentTime);
+  }, 1000);
+});
+</script>
+
+</body>
+</html>
